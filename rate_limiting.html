@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giới Hạn Tốc Độ - AnimeVietsub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, 
+                #ff9a9e 0%, 
+                #fecfef 15%, 
+                #ffecd2 30%, 
+                #fcb69f 45%, 
+                #ff6b6b 60%, 
+                #ee5a52 75%, 
+                #d63384 90%, 
+                #b91c1c 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Watercolor background effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 182, 193, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 80% 30%, rgba(255, 105, 97, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 70%, rgba(255, 192, 203, 0.5) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(220, 20, 60, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 10% 60%, rgba(255, 20, 147, 0.4) 0%, transparent 50%);
+            filter: blur(40px);
+            animation: watercolor 20s ease-in-out infinite alternate;
+            z-index: -2;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><filter id="roughpaper" x="0%" y="0%" width="100%" height="100%"><feTurbulence result="noise" baseFrequency="0.04" numOctaves="5" seed="1"/><feDiffuseLighting in="noise" lighting-color="white" surfaceScale="1"><feDistantLight azimuth="45" elevation="60"/></feDiffuseLighting></filter></defs><rect width="100%" height="100%" filter="url(%23roughpaper)" opacity="0.03"/></svg>') repeat;
+            z-index: -1;
+        }
+
+        @keyframes watercolor {
+            0% { 
+                filter: blur(40px) hue-rotate(0deg);
+                transform: scale(1); 
+            }
+            50% { 
+                filter: blur(50px) hue-rotate(10deg);
+                transform: scale(1.05); 
+            }
+            100% { 
+                filter: blur(35px) hue-rotate(-10deg);
+                transform: scale(1.02); 
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .left-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(25px);
+            border-radius: 35px;
+            padding: 52px;
+            box-shadow: 
+                0 30px 60px rgba(220, 38, 38, 0.15), 
+                0 8px 25px rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            border: 2px solid rgba(255, 182, 193, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .left-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, 
+                #ff6b6b 0%, 
+                #ff8a80 25%, 
+                #ff5722 50%, 
+                #e91e63 75%, 
+                #d63384 100%);
+            border-radius: 35px 35px 0 0;
+        }
+
+        .left-section::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(255, 182, 193, 0.08), transparent);
+            animation: rotate 25s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .right-section {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(25px);
+            border-radius: 35px;
+            padding: 52px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .right-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shine 6s ease-in-out infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 32px;
+        }
+
+        .logo i {
+            font-size: 42px;
+            background: linear-gradient(45deg, #ff6b6b, #ff8a80, #e91e63, #d63384);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 3px 6px rgba(220, 38, 38, 0.4));
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 3px 6px rgba(220, 38, 38, 0.4)); }
+            50% { transform: scale(1.1); filter: drop-shadow(0 5px 15px rgba(220, 38, 38, 0.6)); }
+        }
+
+        .logo h1 {
+            font-size: 28px;
+            font-weight: 800;
+            font-family: 'Fredoka', 'Segoe UI', sans-serif;
+            background: linear-gradient(45deg, #2d3748, #4a5568, #1a202c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .main-title {
+            font-size: 36px;
+            font-weight: 800;
+            font-family: 'Fredoka', 'Segoe UI', sans-serif;
+            background: linear-gradient(45deg, #1e293b, #334155, #0f172a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #64748b;
+            margin-bottom: 32px;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .rate-limit-info {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8a80 25%, #e91e63 50%, #d63384 75%, #b91c1c 100%);
+            color: white;
+            padding: 24px 32px;
+            border-radius: 20px;
+            margin-bottom: 36px;
+            font-weight: 700;
+            text-align: center;
+            box-shadow: 
+                0 15px 35px rgba(255, 107, 107, 0.4), 
+                0 5px 15px rgba(220, 38, 38, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .rate-limit-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 4s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .limit-section {
+            background: linear-gradient(135deg, #fef2f2 0%, #fdf2f8 50%, #fff1f2 100%);
+            border-radius: 25px;
+            padding: 40px;
+            margin-bottom: 36px;
+            border: 3px solid rgba(255, 182, 193, 0.4);
+            text-align: center;
+            position: relative;
+            box-shadow: 
+                0 10px 30px rgba(255, 107, 107, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        }
+
+        .limit-section::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, #ff6b6b, #ff8a80, #e91e63, #d63384, #b91c1c);
+            border-radius: 25px;
+            z-index: -1;
+            opacity: 0.3;
+            filter: blur(5px);
+        }
+
+        .limit-section h3 {
+            color: #dc2626;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            font-family: 'Quicksand', 'Segoe UI', sans-serif;
+        }
+
+        .timer-display {
+            background: linear-gradient(135deg, #ffffff 0%, #fef7f7 100%);
+            border: 3px solid #ffb6c1;
+            border-radius: 15px;
+            padding: 48px 24px;
+            margin: 16px 0;
+            color: #dc2626;
+            font-size: 32px;
+            font-weight: 900;
+            font-family: 'Courier New', monospace;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(255, 182, 193, 0.3);
+        }
+
+        .timer-display::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 182, 193, 0.3), transparent);
+            animation: loading 3s ease-in-out infinite;
+        }
+
+        @keyframes loading {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .instruction, .warning, .error {
+            border-radius: 18px;
+            padding: 24px;
+            margin-bottom: 24px;
+            position: relative;
+            border-left: 6px solid;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .instruction {
+            background: linear-gradient(135deg, #fef2f2 0%, #fdf2f8 100%);
+            border-left-color: #ef4444;
+        }
+
+        .warning {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left-color: #f59e0b;
+        }
+
+        .error {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border-left-color: #dc2626;
+        }
+
+        .instruction h3, .warning h3, .error h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            font-family: 'Quicksand', 'Segoe UI', sans-serif;
+        }
+
+        .instruction h3 { color: #dc2626; }
+        .warning h3 { color: #92400e; }
+        .error h3 { color: #b91c1c; }
+
+        .instruction p, .warning p, .error p {
+            font-size: 15px;
+            line-height: 1.6;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .instruction p { color: #991b1b; }
+        .warning p { color: #78350f; }
+        .error p { color: #991b1b; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 36px;
+            border: none;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Quicksand', 'Segoe UI', sans-serif;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8a80 25%, #e91e63 50%, #d63384 100%);
+            color: white;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
+        }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            color: #dc2626;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 12px 20px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(233, 30, 99, 0.1) 100%);
+            border: 2px solid rgba(220, 38, 38, 0.2);
+            font-family: 'Quicksand', 'Segoe UI', sans-serif;
+        }
+
+        .contact-link:hover {
+            color: #b91c1c;
+            transform: translateX(8px) scale(1.05);
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.2) 0%, rgba(233, 30, 99, 0.2) 100%);
+            border-color: rgba(220, 38, 38, 0.4);
+        }
+
+        .footer {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 2px solid rgba(255, 182, 193, 0.3);
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .footer ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer li {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+        }
+
+        .footer i {
+            color: #ff6b6b;
+        }
+
+        .anime-illustration {
+            width: 280px;
+            height: 280px;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8a80 25%, #e91e63 50%, #d63384 75%, #b91c1c 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                0 30px 60px rgba(255, 107, 107, 0.4),
+                0 10px 30px rgba(233, 30, 99, 0.3),
+                inset 0 5px 0 rgba(255, 255, 255, 0.2);
+            animation: anime-float 4s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            padding: 8px;
+        }
+
+        .anime-illustration img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            filter: brightness(1.1) saturate(1.2);
+        }
+
+        @keyframes anime-float {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg); 
+                box-shadow: 
+                    0 30px 60px rgba(255, 107, 107, 0.4),
+                    0 10px 30px rgba(233, 30, 99, 0.3),
+                    inset 0 5px 0 rgba(255, 255, 255, 0.2);
+            }
+            50% { 
+                transform: translateY(-15px) rotate(5deg); 
+                box-shadow: 
+                    0 35px 70px rgba(255, 107, 107, 0.5),
+                    0 15px 35px rgba(233, 30, 99, 0.4),
+                    inset 0 5px 0 rgba(255, 255, 255, 0.3);
+            }
+        }
+
+        .right-section h3 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            font-family: 'Fredoka', 'Segoe UI', sans-serif;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .right-section p {
+            font-size: 16px;
+            margin-bottom: 36px;
+            opacity: 0.95;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .feature-list i {
+            color: #10b981;
+            font-size: 22px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.2));
+            padding: 10px;
+            border-radius: 50%;
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+        }
+
+        /* Floating particles effect */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 107, 107, 0.6);
+            border-radius: 50%;
+            animation: float-particle 15s linear infinite;
+        }
+
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 16px;
+            }
+
+            .left-section,
+            .right-section {
+                padding: 32px 24px;
+            }
+
+            .main-title {
+                font-size: 28px;
+            }
+
+            .anime-illustration {
+                width: 180px;
+                height: 180px;
+                font-size: 75px;
+            }
+
+            .right-section {
+                order: -1;
+            }
+
+            .right-section h3 {
+                font-size: 24px;
+            }
+
+            .timer-display {
+                font-size: 24px;
+            }
+        }
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            .left-section {
+                background: rgba(30, 41, 59, 0.95);
+                color: white;
+                border-color: rgba(255, 107, 107, 0.3);
+            }
+
+            .logo h1,
+            .main-title {
+                background: linear-gradient(45deg, #ffffff, #f1f5f9, #e2e8f0);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            .subtitle {
+                color: #cbd5e1;
+            }
+
+            .limit-section {
+                background: linear-gradient(135deg, rgba(51, 65, 85, 0.8) 0%, rgba(30, 41, 59, 0.8) 100%);
+                border-color: rgba(255, 107, 107, 0.4);
+            }
+
+            .timer-display {
+                background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(220, 38, 38, 0.2) 100%);
+                border-color: #ff6b6b;
+                color: #fca5a5;
+            }
+
+            .footer {
+                border-color: rgba(255, 107, 107, 0.3);
+                color: #cbd5e1;
+            }
+
+            .instruction, .warning, .error {
+                background: linear-gradient(135deg, rgba(51, 65, 85, 0.6) 0%, rgba(30, 41, 59, 0.6) 100%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles"></div>
+    
+    <div class="container">
+        <div class="left-section">
+            <div class="logo">
+                <span style="font-size: 42px;">⛩️</span>
+                <h1>AnimeVietsub</h1>
+            </div>
+
+            <h2 class="main-title">Giới Hạn Tốc Độ ⏰</h2>
+            <p class="subtitle">Bạn đã thực hiện quá nhiều yêu cầu trong thời gian ngắn. Vui lòng chờ một chút trước khi thử lại! 🌸</p>
+
+            <div class="rate-limit-info">
+                <span style="font-size: 20px;">🚦</span>
+                Hệ thống bảo vệ tốc độ đã được kích hoạt
+            </div>
+
+            <div class="limit-section">
+                <h3>⏳ Thời gian chờ còn lại</h3>
+                <div class="timer-display" id="countdown">
+                    <span style="font-size: 28px; color: #ff6b6b; margin-bottom: 16px;">⏰</span>
+                    <br>
+                    <span id="timeLeft">60s</span>
+                    <br>
+                    <small style="font-size: 14px;">Tự động tải lại sau khi hết thời gian! ✨</small>
+                </div>
+            </div>
+
+            <div class="instruction">
+                <h3><span style="font-size: 18px;">📋</span> Tại sao bị giới hạn?</h3>
+                <p>Hệ thống phát hiện nhiều yêu cầu từ địa chỉ IP của bạn trong thời gian ngắn để bảo vệ máy chủ khỏi quá tải. ✨</p>
+            </div>
+
+            <div class="warning">
+                <h3><span style="font-size: 18px;">⭐</span> Làm thế nào để tránh?</h3>
+                <p>• Tránh tải lại trang liên tục<br>
+                • Không sử dụng bot hoặc script tự động<br>
+                • Duyệt web với tốc độ bình thường<br>
+                • Chờ đợi một chút giữa các lần click 🎭</p>
+            </div>
+
+            <div class="error">
+                <h3><span style="font-size: 18px;">🔄</span> Sau khi hết thời gian chờ</h3>
+                <p>Trang sẽ tự động tải lại và bạn có thể tiếp tục sử dụng website bình thường. Cảm ơn bạn đã kiên nhẫn! 💪</p>
+            </div>
+
+            <div style="text-align: center; margin-bottom: 24px;">
+                <button id="retryButton" class="btn btn-primary" disabled>
+                    <span style="font-size: 18px;">⏳</span>
+                    Đang chờ... (<span id="buttonTimer">60</span>s)
+                </button>
+            </div>
+
+            <div style="text-align: center; margin-bottom: 24px;">
+                <a href="https://www.facebook.com/animevietsub.info" class="contact-link">
+                    <span style="font-size: 18px;">📘</span>
+                    Liên hệ Admin nếu cần hỗ trợ
+                </a>
+            </div>
+
+            <div class="footer">
+                <ul>
+                    <li><span style="font-size: 16px;">🆔</span> Ray ID: ::RAY_ID::</li>
+                    <li><span style="font-size: 16px;">📍</span> IP: ::CLIENT_IP::</li>
+                    <li><span style="font-size: 16px;">🛡️</span> Bảo mật bởi Cloudflare</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="right-section">
+            <div class="anime-illustration">
+                <img src="a.jpg" alt="Anime Character" />
+            </div>
+            
+            <h3>Hệ thống bảo vệ thông minh 🛡️</h3>
+            <p>Chúng tôi sử dụng công nghệ AI để phát hiện và ngăn chặn các hoạt động bất thường nhằm bảo vệ trải nghiệm của tất cả người dùng! ✨</p>
+            
+            <ul class="feature-list">
+                <li>
+                    <span style="font-size: 22px;">🤖</span>
+                    <span>AI phát hiện bot tự động</span>
+                </li>
+                <li>
+                    <span style="font-size: 22px;">⚡</span>
+                    <span>Bảo vệ khỏi DDoS attack</span>
+                </li>
+                <li>
+                    <span style="font-size: 22px;">📊</span>
+                    <span>Phân tích hành vi người dùng</span>
+                </li>
+                <li>
+                    <span style="font-size: 22px;">🔒</span>
+                    <span>Bảo mật dữ liệu tối ưu</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Performance optimizations
+        let isAnimating = false;
+        let particlesCreated = false;
+        let countdownInterval = null;
+        let timeRemaining = 60; // 60 seconds countdown
+
+        // Optimized particle creation with requestAnimationFrame
+        function createParticles() {
+            if (particlesCreated) return;
+            
+            const particlesContainer = document.querySelector('.particles');
+            if (!particlesContainer) return;
+            
+            const colors = ['#ff6b6b', '#ff8a80', '#e91e63', '#d63384', '#ffb6c1'];
+            const fragment = document.createDocumentFragment();
+            
+            for (let i = 0; i < 12; i++) { // Reduced from 15 to 12 for better performance
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.cssText = `
+                    left: ${Math.random() * 100}%;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    animation-duration: ${(Math.random() * 8 + 12)}s;
+                    animation-delay: ${Math.random() * 10}s;
+                `;
+                fragment.appendChild(particle);
+            }
+            
+            particlesContainer.appendChild(fragment);
+            particlesCreated = true;
+        }
+
+        // Debounced animation function
+        function debounceAnimation(func, delay = 16) {
+            let timeoutId;
+            return function (...args) {
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(() => func.apply(this, args), delay);
+            };
+        }
+
+        // Optimized transform with requestAnimationFrame
+        function smoothTransform(element, transform) {
+            if (isAnimating) return;
+            isAnimating = true;
+            
+            requestAnimationFrame(() => {
+                element.style.transform = transform;
+                element.style.willChange = 'transform';
+                
+                setTimeout(() => {
+                    isAnimating = false;
+                    element.style.willChange = 'auto';
+                }, 300);
+            });
+        }
+
+        // Countdown timer function
+        function startCountdown() {
+            const timeLeftElement = document.getElementById('timeLeft');
+            const buttonTimerElement = document.getElementById('buttonTimer');
+            const retryButton = document.getElementById('retryButton');
+
+            countdownInterval = setInterval(() => {
+                if (timeRemaining <= 0) {
+                    clearInterval(countdownInterval);
+                    window.location.reload();
+                    return;
+                }
+
+                timeLeftElement.textContent = timeRemaining + 's';
+                buttonTimerElement.textContent = timeRemaining;
+                
+                if (timeRemaining <= 10) {
+                    timeLeftElement.style.color = '#ff6b6b';
+                    timeLeftElement.style.animation = 'pulse-glow 1s ease-in-out infinite';
+                }
+
+                timeRemaining--;
+            }, 1000);
+
+            // Enable retry button when countdown ends
+            setTimeout(() => {
+                retryButton.disabled = false;
+                retryButton.innerHTML = '<span style="font-size: 18px;">🔄</span> Thử lại ngay';
+                retryButton.onclick = () => window.location.reload();
+            }, timeRemaining * 1000);
+        }
+
+        // Optimized event handlers
+        function initializeEventHandlers() {
+            // Optimized hover effects with debouncing
+            const debouncedHover = debounceAnimation((element, transform) => {
+                smoothTransform(element, transform);
+            });
+
+            // Button hover effects
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.addEventListener('mouseenter', () => {
+                    if (!btn.disabled) {
+                        debouncedHover(btn, 'translateY(-4px) scale(1.05)');
+                    }
+                }, { passive: true });
+                
+                btn.addEventListener('mouseleave', () => {
+                    debouncedHover(btn, 'translateY(0) scale(1)');
+                }, { passive: true });
+            });
+
+            // Anime illustration hover effects
+            document.querySelectorAll('.anime-illustration').forEach(element => {
+                element.addEventListener('mouseenter', () => {
+                    debouncedHover(element, 'scale(1.1) rotate(5deg)');
+                }, { passive: true });
+                
+                element.addEventListener('mouseleave', () => {
+                    debouncedHover(element, 'scale(1) rotate(0deg)');
+                }, { passive: true });
+            });
+        }
+
+        // Optimized initialization
+        function initialize() {
+            // Start countdown immediately
+            startCountdown();
+            
+            // Use requestIdleCallback for non-critical tasks
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(() => {
+                    createParticles();
+                    initializeEventHandlers();
+                });
+            } else {
+                // Fallback for browsers without requestIdleCallback
+                setTimeout(() => {
+                    createParticles();
+                    initializeEventHandlers();
+                }, 100);
+            }
+        }
+
+        // Enhanced loading with better performance
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initialize, { once: true });
+        } else {
+            initialize();
+        }
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', () => {
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+            }
+            isAnimating = false;
+            particlesCreated = false;
+        }, { passive: true });
+    </script>
+</body>
+</html> 
