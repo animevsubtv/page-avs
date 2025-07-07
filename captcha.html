@@ -4,24 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xác Minh An Toàn - AnimeVietsub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #ff9a9e, #fecfef, #ff6b6b, #d63384);
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, 
+                #ff9a9e 0%, 
+                #fecfef 15%, 
+                #ffecd2 30%, 
+                #fcb69f 45%, 
+                #ff6b6b 60%, 
+                #ee5a52 75%, 
+                #d63384 90%, 
+                #b91c1c 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+            overflow-x: hidden;
         }
-        
+
+        /* Watercolor background effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 182, 193, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 80% 30%, rgba(255, 105, 97, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 70%, rgba(255, 192, 203, 0.5) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(220, 20, 60, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 10% 60%, rgba(255, 20, 147, 0.4) 0%, transparent 50%);
+            filter: blur(40px);
+            animation: watercolor 20s ease-in-out infinite alternate;
+            z-index: -2;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><filter id="roughpaper" x="0%" y="0%" width="100%" height="100%"><feTurbulence result="noise" baseFrequency="0.04" numOctaves="5" seed="1"/><feDiffuseLighting in="noise" lighting-color="white" surfaceScale="1"><feDistantLight azimuth="45" elevation="60"/></feDiffuseLighting></filter></defs><rect width="100%" height="100%" filter="url(%23roughpaper)" opacity="0.03"/></svg>') repeat;
+            z-index: -1;
+        }
+
+        @keyframes watercolor {
+            0% { 
+                filter: blur(40px) hue-rotate(0deg);
+                transform: scale(1); 
+            }
+            50% { 
+                filter: blur(50px) hue-rotate(10deg);
+                transform: scale(1.05); 
+            }
+            100% { 
+                filter: blur(35px) hue-rotate(-10deg);
+                transform: scale(1.02); 
+            }
+        }
+
         .container {
             max-width: 1200px;
             width: 100%;
@@ -33,416 +87,715 @@
             align-items: center;
             min-height: 100vh;
         }
-        
+
         .left-section {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(25px);
-            border-radius: 25px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(220, 38, 38, 0.15);
+            border-radius: 35px;
+            padding: 52px;
+            box-shadow: 
+                0 30px 60px rgba(220, 38, 38, 0.15), 
+                0 8px 25px rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
             border: 2px solid rgba(255, 182, 193, 0.3);
             position: relative;
+            overflow: hidden;
         }
-        
+
         .left-section::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, #ff6b6b, #e91e63, #d63384);
-            border-radius: 25px 25px 0 0;
+            height: 8px;
+            background: linear-gradient(90deg, 
+                #ff6b6b 0%, 
+                #ff8a80 25%, 
+                #ff5722 50%, 
+                #e91e63 75%, 
+                #d63384 100%);
+            border-radius: 35px 35px 0 0;
         }
-        
+
+        .left-section::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(255, 182, 193, 0.08), transparent);
+            animation: rotate 25s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         .right-section {
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(25px);
-            border-radius: 25px;
-            padding: 40px;
+            border-radius: 35px;
+            padding: 52px;
             border: 2px solid rgba(255, 255, 255, 0.3);
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             text-align: center;
             color: white;
+            position: relative;
+            overflow: hidden;
         }
-        
+
+        .right-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shine 6s ease-in-out infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
         .logo {
             display: flex;
             align-items: center;
             gap: 15px;
-            margin-bottom: 24px;
+            margin-bottom: 32px;
         }
-        
+
         .logo i {
-            font-size: 36px;
-            color: #ff6b6b;
+            font-size: 42px;
+            background: linear-gradient(45deg, #ff6b6b, #ff8a80, #e91e63, #d63384);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 3px 6px rgba(220, 38, 38, 0.4));
+            animation: pulse-glow 3s ease-in-out infinite;
         }
-        
+
+        @keyframes pulse-glow {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 3px 6px rgba(220, 38, 38, 0.4)); }
+            50% { transform: scale(1.1); filter: drop-shadow(0 5px 15px rgba(220, 38, 38, 0.6)); }
+        }
+
         .logo h1 {
-            font-size: 24px;
-            font-weight: 700;
-            color: #2d3748;
-            margin: 0;
-        }
-        
-        .main-title {
             font-size: 28px;
-            font-weight: 700;
-            color: #1e293b;
+            font-weight: 800;
+            font-family: 'Fredoka', 'Segoe UI', sans-serif;
+            background: linear-gradient(45deg, #2d3748, #4a5568, #1a202c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .main-title {
+            font-size: 36px;
+            font-weight: 800;
+            font-family: 'Fredoka', 'Segoe UI', sans-serif;
+            background: linear-gradient(45deg, #1e293b, #334155, #0f172a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 16px;
             line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
-        
+
         .subtitle {
             font-size: 16px;
             color: #64748b;
-            margin-bottom: 24px;
+            margin-bottom: 32px;
             line-height: 1.6;
             font-weight: 500;
         }
-        
+
         .domain-info {
-            background: linear-gradient(135deg, #ff6b6b, #e91e63, #d63384);
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8a80 25%, #e91e63 50%, #d63384 75%, #b91c1c 100%);
             color: white;
-            padding: 20px;
-            border-radius: 16px;
-            margin-bottom: 24px;
+            padding: 24px 32px;
+            border-radius: 20px;
+            margin-bottom: 36px;
             font-weight: 700;
             text-align: center;
-            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.4);
+            box-shadow: 
+                0 15px 35px rgba(255, 107, 107, 0.4), 
+                0 5px 15px rgba(220, 38, 38, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        
+
+        .domain-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 4s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
         .verification-section {
-            background: #fef2f2;
-            border-radius: 20px;
-            padding: 32px;
-            margin-bottom: 28px;
-            border: 2px solid rgba(255, 182, 193, 0.4);
+            background: linear-gradient(135deg, #fef2f2 0%, #fdf2f8 50%, #fff1f2 100%);
+            border-radius: 25px;
+            padding: 40px;
+            margin-bottom: 36px;
+            border: 3px solid rgba(255, 182, 193, 0.4);
             text-align: center;
-            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.15);
+            position: relative;
+            box-shadow: 
+                0 10px 30px rgba(255, 107, 107, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
         }
-        
+
+        .verification-section::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, #ff6b6b, #ff8a80, #e91e63, #d63384, #b91c1c);
+            border-radius: 25px;
+            z-index: -1;
+            opacity: 0.3;
+            filter: blur(5px);
+        }
+
         .verification-section h3 {
             color: #dc2626;
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 700;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
+            font-family: 'Quicksand', 'Segoe UI', sans-serif;
         }
-        
+
         .captcha-placeholder {
-            background: #ffffff;
-            border: 2px solid #ffb6c1;
-            border-radius: 12px;
-            padding: 36px 20px;
-            margin: 12px 0;
+            background: linear-gradient(135deg, #ffffff 0%, #fef7f7 100%);
+            border: 3px solid #ffb6c1;
+            border-radius: 15px;
+            padding: 48px 24px;
+            margin: 16px 0;
             color: #dc2626;
             font-size: 14px;
+            position: relative;
+            overflow: hidden;
             box-shadow: inset 0 2px 4px rgba(255, 182, 193, 0.3);
         }
-        
-        .instruction, .warning, .error {
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-left: 4px solid;
+
+        .captcha-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 182, 193, 0.3), transparent);
+            animation: loading 3s ease-in-out infinite;
         }
-        
+
+        @keyframes loading {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .instruction, .warning, .error {
+            border-radius: 18px;
+            padding: 24px;
+            margin-bottom: 24px;
+            position: relative;
+            border-left: 6px solid;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
         .instruction {
-            background: #fef2f2;
+            background: linear-gradient(135deg, #fef2f2 0%, #fdf2f8 100%);
             border-left-color: #ef4444;
         }
-        
+
         .warning {
-            background: #fef3c7;
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
             border-left-color: #f59e0b;
         }
-        
+
         .error {
-            background: #fee2e2;
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
             border-left-color: #dc2626;
         }
-        
+
         .instruction h3, .warning h3, .error h3 {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            font-family: 'Quicksand', 'Segoe UI', sans-serif;
         }
-        
-        .instruction h3 {
-            color: #dc2626;
-        }
-        
-        .warning h3 {
-            color: #92400e;
-        }
-        
-        .error h3 {
-            color: #b91c1c;
-        }
-        
+
+        .instruction h3 { color: #dc2626; }
+        .warning h3 { color: #92400e; }
+        .error h3 { color: #b91c1c; }
+
         .instruction p, .warning p, .error p {
-            font-size: 14px;
+            font-size: 15px;
             line-height: 1.6;
             margin: 0;
             font-weight: 500;
         }
-        
-        .instruction p {
-            color: #991b1b;
-        }
-        
-        .warning p {
-            color: #78350f;
-        }
-        
-        .error p {
-            color: #991b1b;
-        }
-        
+
+        .instruction p { color: #991b1b; }
+        .warning p { color: #78350f; }
+        .error p { color: #991b1b; }
+
         .btn {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            padding: 14px 28px;
+            gap: 12px;
+            padding: 18px 36px;
             border: none;
-            border-radius: 16px;
+            border-radius: 20px;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 16px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             text-decoration: none;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Quicksand', 'Segoe UI', sans-serif;
         }
-        
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
         .btn-primary {
-            background: linear-gradient(135deg, #ff6b6b, #e91e63, #d63384);
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8a80 25%, #e91e63 50%, #d63384 100%);
             color: white;
-            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.2);
         }
-        
+
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(255, 107, 107, 0.6);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
         }
-        
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #ffffff 0%, #fef7f7 100%);
+            color: #dc2626;
+            border: 3px solid #ff6b6b;
+            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #ff6b6b 0%, #e91e63 100%);
+            color: white;
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(220, 38, 38, 0.4);
+        }
+
         .contact-link {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             color: #dc2626;
             text-decoration: none;
             font-weight: 700;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            padding: 10px 16px;
-            border-radius: 12px;
-            background: rgba(255, 107, 107, 0.1);
+            font-size: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 12px 20px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(233, 30, 99, 0.1) 100%);
             border: 2px solid rgba(220, 38, 38, 0.2);
+            font-family: 'Quicksand', 'Segoe UI', sans-serif;
         }
-        
+
         .contact-link:hover {
             color: #b91c1c;
-            transform: translateX(6px);
-            background: rgba(255, 107, 107, 0.2);
+            transform: translateX(8px) scale(1.05);
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.2) 0%, rgba(233, 30, 99, 0.2) 100%);
             border-color: rgba(220, 38, 38, 0.4);
         }
-        
+
         .footer {
-            margin-top: 24px;
-            padding-top: 20px;
+            margin-top: 32px;
+            padding-top: 24px;
             border-top: 2px solid rgba(255, 182, 193, 0.3);
-            font-size: 11px;
+            font-size: 13px;
             color: #64748b;
         }
-        
+
         .footer ul {
             list-style: none;
             display: flex;
             flex-wrap: wrap;
-            gap: 16px;
+            gap: 20px;
         }
-        
+
         .footer li {
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
             font-weight: 500;
         }
-        
+
         .footer i {
             color: #ff6b6b;
         }
-        
+
         .anime-illustration {
-            width: 200px;
-            height: 200px;
-            margin-bottom: 32px;
-            background: linear-gradient(135deg, #ff6b6b, #e91e63, #d63384);
+            width: 280px;
+            height: 280px;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8a80 25%, #e91e63 50%, #d63384 75%, #b91c1c 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 20px 40px rgba(255, 107, 107, 0.4);
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            padding: 6px;
+            box-shadow: 
+                0 30px 60px rgba(255, 107, 107, 0.4),
+                0 10px 30px rgba(233, 30, 99, 0.3),
+                inset 0 5px 0 rgba(255, 255, 255, 0.2);
+            animation: anime-float 4s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            padding: 8px;
         }
-        
+
         .anime-illustration img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             border-radius: 50%;
+            filter: brightness(1.1) saturate(1.2);
         }
-        
+
+        @keyframes anime-float {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg); 
+                box-shadow: 
+                    0 30px 60px rgba(255, 107, 107, 0.4),
+                    0 10px 30px rgba(233, 30, 99, 0.3),
+                    inset 0 5px 0 rgba(255, 255, 255, 0.2);
+            }
+            50% { 
+                transform: translateY(-15px) rotate(5deg); 
+                box-shadow: 
+                    0 35px 70px rgba(255, 107, 107, 0.5),
+                    0 15px 35px rgba(233, 30, 99, 0.4),
+                    inset 0 5px 0 rgba(255, 255, 255, 0.3);
+            }
+        }
+
         .right-section h3 {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            font-family: 'Fredoka', 'Segoe UI', sans-serif;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
-        
+
         .right-section p {
-            font-size: 14px;
-            margin-bottom: 24px;
+            font-size: 16px;
+            margin-bottom: 36px;
             opacity: 0.95;
             line-height: 1.6;
             font-weight: 500;
         }
-        
+
         .feature-list {
             list-style: none;
-            margin-bottom: 24px;
+            margin-bottom: 32px;
         }
-        
+
         .feature-list li {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
+            gap: 15px;
+            margin-bottom: 20px;
             color: rgba(255, 255, 255, 0.95);
             font-weight: 600;
-            font-size: 14px;
+            font-size: 16px;
         }
-        
+
         .feature-list i {
             color: #10b981;
-            font-size: 18px;
-            background: rgba(16, 185, 129, 0.2);
-            padding: 8px;
+            font-size: 22px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.2));
+            padding: 10px;
             border-radius: 50%;
-            width: 32px;
-            height: 32px;
+            width: 42px;
+            height: 42px;
             display: flex;
             align-items: center;
             justify-content: center;
             border: 2px solid rgba(16, 185, 129, 0.3);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
         }
-        
+
+        /* Floating particles effect */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 107, 107, 0.6);
+            border-radius: 50%;
+            animation: float-particle 15s linear infinite;
+        }
+
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Mobile Responsive */
         @media (max-width: 768px) {
             .container {
                 grid-template-columns: 1fr;
-                gap: 16px;
-                padding: 12px;
+                gap: 20px;
+                padding: 16px;
             }
-            
-            .left-section, .right-section {
-                padding: 24px 20px;
+
+            .left-section,
+            .right-section {
+                padding: 32px 24px;
             }
-            
+
             .main-title {
-                font-size: 22px;
+                font-size: 28px;
             }
-            
+
             .anime-illustration {
-                width: 140px;
-                height: 140px;
+                width: 180px;
+                height: 180px;
+                font-size: 75px;
             }
-            
+
             .right-section {
                 order: -1;
             }
-            
+
             .right-section h3 {
-                font-size: 18px;
+                font-size: 24px;
+            }
+        }
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            .left-section {
+                background: rgba(30, 41, 59, 0.95);
+                color: white;
+                border-color: rgba(255, 107, 107, 0.3);
+            }
+
+            .logo h1,
+            .main-title {
+                background: linear-gradient(45deg, #ffffff, #f1f5f9, #e2e8f0);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            .subtitle {
+                color: #cbd5e1;
+            }
+
+            .verification-section {
+                background: linear-gradient(135deg, rgba(51, 65, 85, 0.8) 0%, rgba(30, 41, 59, 0.8) 100%);
+                border-color: rgba(255, 107, 107, 0.4);
+            }
+
+            .captcha-placeholder {
+                background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(220, 38, 38, 0.2) 100%);
+                border-color: #ff6b6b;
+                color: #fca5a5;
+            }
+
+            .footer {
+                border-color: rgba(255, 107, 107, 0.3);
+                color: #cbd5e1;
+            }
+
+            .instruction, .warning, .error {
+                background: linear-gradient(135deg, rgba(51, 65, 85, 0.6) 0%, rgba(30, 41, 59, 0.6) 100%);
             }
         }
     </style>
 </head>
 <body>
+    <div class="particles"></div>
+    
     <div class="container">
         <div class="left-section">
             <div class="logo">
-                <i class="fas fa-torii-gate"></i>
+                <span style="font-size: 42px;">⛩️</span>
                 <h1>AnimeVietsub</h1>
             </div>
+
             <h2 class="main-title">Xác Minh Bảo Mật ✨</h2>
             <p class="subtitle">Chúng tôi cần xác minh rằng bạn là người thật để bảo vệ trang web khỏi các cuộc tấn công tự động. Cảm ơn bạn đã kiên nhẫn! 🌸</p>
+
             <div class="domain-info">
-                <i class="fas fa-globe"></i>
+                <span style="font-size: 20px;">🌐</span>
                 Đang truy cập: <span id="domainName"></span>
             </div>
+
             <div class="instruction">
-                <h3><i class="fas fa-magic"></i> Hướng dẫn xác minh</h3>
+                <h3><span style="font-size: 18px;">🔎</span> Hướng dẫn xác minh</h3>
                 <p>Vui lòng đợi một chút để hệ thống tải ô xác minh bên dưới, sau đó click vào ô đó để hoàn tất quá trình xác minh. ✨</p>
             </div>
+
             <div class="verification-section">
                 <h3>🛡️ Khu vực xác minh</h3>
                 <div class="captcha-placeholder">
-                    <i class="fas fa-heart" style="font-size: 24px; color: #ff6b6b; margin-bottom: 12px;"></i>
+                    <span style="font-size: 28px; color: #ff6b6b; margin-bottom: 16px;">❤️</span>
                     <br>
                     <strong>::CAPTCHA_BOX::</strong>
                     <br>
                     <small>Ô xác minh sẽ xuất hiện tại đây như phép thuật! ✨</small>
                 </div>
             </div>
+
             <div class="warning">
-                <h3><i class="fas fa-star"></i> Lưu ý quan trọng</h3>
+                <h3><span style="font-size: 18px;">⭐</span> Lưu ý quan trọng</h3>
                 <p>Nếu không thấy ô xác minh, vui lòng thử với trình duyệt khác hoặc tắt trình chặn quảng cáo. Đôi khi phép thuật cần thời gian! 🎭</p>
             </div>
+
             <div class="error">
-                <h3><i class="fas fa-redo-alt"></i> Gặp vấn đề?</h3>
+                <h3><span style="font-size: 18px;">🔄</span> Gặp vấn đề?</h3>
                 <p>Nếu xác minh bị lỗi lặp lại, hãy thử tải lại trang hoặc sử dụng trình duyệt khác. Mọi thứ sẽ ổn thôi! 💪</p>
             </div>
-            <div style="text-align: center; margin-bottom: 20px;">
+
+            <div style="text-align: center; margin-bottom: 24px;">
                 <button id="unregisterButton" class="btn btn-primary">
-                    <i class="fas fa-sparkles"></i>
+                    <span style="font-size: 18px;">✨</span>
                     Tải Lại Trang
                 </button>
             </div>
-            <div style="text-align: center; margin-bottom: 20px;">
+
+            <div style="text-align: center; margin-bottom: 24px;">
                 <a href="https://www.facebook.com/animevietsub.info" class="contact-link">
-                    <i class="fab fa-facebook"></i>
+                    <span style="font-size: 18px;">📘</span>
                     Liên hệ Admin để được hỗ trợ
                 </a>
             </div>
+
             <div class="footer">
                 <ul>
-                    <li><i class="fas fa-fingerprint"></i> Cloudflare ID: ::RAY_ID::</li>
-                    <li><i class="fas fa-map-marker-alt"></i> IP: ::CLIENT_IP::</li>
-                    <li><i class="fas fa-shield-alt"></i> Bảo mật bởi Cloudflare</li>
+                    <li><span style="font-size: 16px;">🆔</span> Cloudflare ID: ::RAY_ID::</li>
+                    <li><span style="font-size: 16px;">📍</span> IP: ::CLIENT_IP::</li>
+                    <li><span style="font-size: 16px;">🛡️</span> Bảo mật bởi Cloudflare</li>
                 </ul>
             </div>
         </div>
+
         <div class="right-section">
             <div class="anime-illustration">
-                <img src="https://lh3.googleusercontent.com/XlNytMjWrQPmZqAvekvgGawQdOcnHc5_yOtJJaT0Q3nWjVCna0s_InRLQzqa-B-DL9pLn1vUsusCBXihvkU5FmQ4hJmmUNjH1smW3CsP-jhDCWySWo8RK-xPOWE=s0" alt="Anime Character" />
+                <img src="a.jpg" alt="Anime Character" />
             </div>
+            
             <h3>Trải nghiệm anime tuyệt vời 🌸</h3>
             <p>Hàng nghìn bộ anime chất lượng cao đang chờ bạn khám phá! Hãy cùng nhau tạo nên những kỷ niệm đẹp! ✨</p>
+            
             <ul class="feature-list">
-                <li><i class="fas fa-gem"></i><span>Chất lượng HD/Full HD cực nét</span></li>
-                <li><i class="fas fa-language"></i><span>Phụ đề tiếng Việt chất lượng</span></li>
-                <li><i class="fas fa-rocket"></i><span>Cập nhật nhanh như chớp</span></li>
-                <li><i class="fas fa-gift"></i><span>Hoàn toàn miễn phí</span></li>
+                <li>
+                    <span style="font-size: 22px;">💎</span>
+                    <span>Chất lượng HD/Full HD cực nét</span>
+                </li>
+                <li>
+                    <span style="font-size: 22px;">🌐</span>
+                    <span>Phụ đề tiếng Việt chất lượng</span>
+                </li>
+                <li>
+                    <span style="font-size: 22px;">🚀</span>
+                    <span>Cập nhật nhanh như chớp</span>
+                </li>
+                <li>
+                    <span style="font-size: 22px;">🎁</span>
+                    <span>Hoàn toàn miễn phí</span>
+                </li>
             </ul>
         </div>
     </div>
+
     <script>
+        // Set domain name
         window.onload = function() {
             document.getElementById("domainName").innerHTML = window.location.hostname;
+            createParticles();
         };
+
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.querySelector('.particles');
+            const colors = ['#ff6b6b', '#ff8a80', '#e91e63', '#d63384', '#ffb6c1'];
+            
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Service Worker unregister function
         function unregisterSW() {
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.getRegistrations().then(registrations => {
@@ -465,7 +818,31 @@
                 alert('Trình duyệt không hỗ trợ Service Worker. Hãy sử dụng Chrome, Edge, hoặc Firefox. 🌟');
             }
         }
+
+        // Add click event listener
         document.getElementById('unregisterButton').addEventListener('click', unregisterSW);
+
+        // Add interactive effects
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-4px) scale(1.05)';
+            });
+            
+            btn.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Add sparkle effect on hover
+        document.querySelectorAll('.anime-illustration').forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.1) rotate(5deg)';
+            });
+            
+            element.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1) rotate(0deg)';
+            });
+        });
     </script>
 </body>
 </html>
