@@ -772,77 +772,162 @@
     </div>
 
     <script>
-        // Set domain name
-        window.onload = function() {
-            document.getElementById("domainName").innerHTML = window.location.hostname;
-            createParticles();
-        };
+        // Performance optimizations
+        let isAnimating = false;
+        let particlesCreated = false;
 
-        // Create floating particles
+        // Optimized domain name setting
+        function setDomainName() {
+            const domainElement = document.getElementById("domainName");
+            if (domainElement) {
+                domainElement.textContent = window.location.hostname;
+            }
+        }
+
+        // Optimized particle creation with requestAnimationFrame
         function createParticles() {
-            const particlesContainer = document.querySelector('.particles');
-            const colors = ['#ff6b6b', '#ff8a80', '#e91e63', '#d63384', '#ffb6c1'];
+            if (particlesCreated) return;
             
-            for (let i = 0; i < 15; i++) {
+            const particlesContainer = document.querySelector('.particles');
+            if (!particlesContainer) return;
+            
+            const colors = ['#ff6b6b', '#ff8a80', '#e91e63', '#d63384', '#ffb6c1'];
+            const fragment = document.createDocumentFragment();
+            
+            for (let i = 0; i < 12; i++) { // Reduced from 15 to 12 for better performance
                 const particle = document.createElement('div');
                 particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.cssText = `
+                    left: ${Math.random() * 100}%;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    animation-duration: ${(Math.random() * 8 + 12)}s;
+                    animation-delay: ${Math.random() * 10}s;
+                `;
+                fragment.appendChild(particle);
+            }
+            
+            particlesContainer.appendChild(fragment);
+            particlesCreated = true;
+        }
+
+        // Debounced animation function
+        function debounceAnimation(func, delay = 16) {
+            let timeoutId;
+            return function (...args) {
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(() => func.apply(this, args), delay);
+            };
+        }
+
+        // Optimized transform with requestAnimationFrame
+        function smoothTransform(element, transform) {
+            if (isAnimating) return;
+            isAnimating = true;
+            
+            requestAnimationFrame(() => {
+                element.style.transform = transform;
+                element.style.willChange = 'transform';
                 
-                particlesContainer.appendChild(particle);
+                setTimeout(() => {
+                    isAnimating = false;
+                    element.style.willChange = 'auto';
+                }, 300);
+            });
+        }
+
+        // Service Worker unregister function (optimized)
+        async function unregisterSW() {
+            if (!('serviceWorker' in navigator)) {
+                alert('Trình duyệt không hỗ trợ Service Worker. Hãy sử dụng Chrome, Edge, hoặc Firefox. 🌟');
+                return;
+            }
+
+            try {
+                const registrations = await navigator.serviceWorker.getRegistrations();
+                
+                if (registrations.length === 0) {
+                    alert('Không thể xóa service worker! Hãy thử trình duyệt khác. 🌸');
+                    location.reload();
+                    return;
+                }
+
+                await Promise.all(registrations.map(reg => reg.unregister()));
+                alert('Đã xóa cache thành công và tải lại trang! ✨');
+                location.reload();
+                
+            } catch (error) {
+                console.error('Lỗi khi tải lại trang:', error);
+                alert('Có lỗi xảy ra, vui lòng thử lại! 💪');
             }
         }
 
-        // Service Worker unregister function
-        function unregisterSW() {
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.getRegistrations().then(registrations => {
-                    if (registrations.length === 0) {
-                        alert('Không thể xóa service worker! Hãy thử trình duyệt khác. 🌸');
-                        location.reload();
-                        return;
-                    }
-                    Promise.all(registrations.map(registration => registration.unregister()))
-                        .then(() => {
-                            alert('Đã xóa cache thành công và tải lại trang! ✨');
-                            location.reload();
-                        })
-                        .catch(error => {
-                            console.error('Lỗi khi tải lại trang:', error);
-                            alert('Có lỗi xảy ra, vui lòng thử lại! 💪');
-                        });
+        // Optimized event handlers
+        function initializeEventHandlers() {
+            // Button click handler
+            const unregisterBtn = document.getElementById('unregisterButton');
+            if (unregisterBtn) {
+                unregisterBtn.addEventListener('click', unregisterSW, { passive: true });
+            }
+
+            // Optimized hover effects with debouncing
+            const debouncedHover = debounceAnimation((element, transform) => {
+                smoothTransform(element, transform);
+            });
+
+            // Button hover effects
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.addEventListener('mouseenter', () => {
+                    debouncedHover(btn, 'translateY(-4px) scale(1.05)');
+                }, { passive: true });
+                
+                btn.addEventListener('mouseleave', () => {
+                    debouncedHover(btn, 'translateY(0) scale(1)');
+                }, { passive: true });
+            });
+
+            // Anime illustration hover effects
+            document.querySelectorAll('.anime-illustration').forEach(element => {
+                element.addEventListener('mouseenter', () => {
+                    debouncedHover(element, 'scale(1.1) rotate(5deg)');
+                }, { passive: true });
+                
+                element.addEventListener('mouseleave', () => {
+                    debouncedHover(element, 'scale(1) rotate(0deg)');
+                }, { passive: true });
+            });
+        }
+
+        // Optimized initialization
+        function initialize() {
+            setDomainName();
+            
+            // Use requestIdleCallback for non-critical tasks
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(() => {
+                    createParticles();
+                    initializeEventHandlers();
                 });
             } else {
-                alert('Trình duyệt không hỗ trợ Service Worker. Hãy sử dụng Chrome, Edge, hoặc Firefox. 🌟');
+                // Fallback for browsers without requestIdleCallback
+                setTimeout(() => {
+                    createParticles();
+                    initializeEventHandlers();
+                }, 100);
             }
         }
 
-        // Add click event listener
-        document.getElementById('unregisterButton').addEventListener('click', unregisterSW);
+        // Enhanced loading with better performance
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initialize, { once: true });
+        } else {
+            initialize();
+        }
 
-        // Add interactive effects
-        document.querySelectorAll('.btn').forEach(btn => {
-            btn.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-4px) scale(1.05)';
-            });
-            
-            btn.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
-
-        // Add sparkle effect on hover
-        document.querySelectorAll('.anime-illustration').forEach(element => {
-            element.addEventListener('mouseenter', function() {
-                this.style.transform = 'scale(1.1) rotate(5deg)';
-            });
-            
-            element.addEventListener('mouseleave', function() {
-                this.style.transform = 'scale(1) rotate(0deg)';
-            });
-        });
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', () => {
+            isAnimating = false;
+            particlesCreated = false;
+        }, { passive: true });
     </script>
 </body>
 </html>

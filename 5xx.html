@@ -598,40 +598,79 @@
         }
     </style>
     <script type="text/javascript">
-        window.onload = function runScript(){
-            createParticles();
-        };
+        // Performance optimizations
+        let isAnimating = false;
+        let particlesCreated = false;
 
-        // Create floating particles
+        // Optimized particle creation with requestAnimationFrame
         function createParticles() {
-            const particlesContainer = document.querySelector('.particles');
-            const colors = ['#ff6b6b', '#ff8a80', '#e91e63', '#d63384', '#ffb6c1'];
+            if (particlesCreated) return;
             
-            for (let i = 0; i < 15; i++) {
+            const particlesContainer = document.querySelector('.particles');
+            if (!particlesContainer) return;
+            
+            const colors = ['#ff6b6b', '#ff8a80', '#e91e63', '#d63384', '#ffb6c1'];
+            const fragment = document.createDocumentFragment();
+            
+            for (let i = 0; i < 12; i++) { // Reduced from 15 to 12 for better performance
                 const particle = document.createElement('div');
                 particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                particle.style.animationDelay = Math.random() * 15 + 's';
-                
-                particlesContainer.appendChild(particle);
+                particle.style.cssText = `
+                    left: ${Math.random() * 100}%;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    animation-duration: ${(Math.random() * 8 + 12)}s;
+                    animation-delay: ${Math.random() * 10}s;
+                `;
+                fragment.appendChild(particle);
             }
+            
+            particlesContainer.appendChild(fragment);
+            particlesCreated = true;
         }
 
-        // Add interactive effects
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add sparkle effect on hover
-            document.querySelectorAll('.anime-illustration').forEach(element => {
-                element.addEventListener('mouseenter', function() {
-                    this.style.transform = 'scale(1.1) rotate(5deg)';
-                });
+        // Debounced animation function
+        function debounceAnimation(func, delay = 16) {
+            let timeoutId;
+            return function (...args) {
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(() => func.apply(this, args), delay);
+            };
+        }
+
+        // Optimized transform with requestAnimationFrame
+        function smoothTransform(element, transform) {
+            if (isAnimating) return;
+            isAnimating = true;
+            
+            requestAnimationFrame(() => {
+                element.style.transform = transform;
+                element.style.willChange = 'transform';
                 
-                element.addEventListener('mouseleave', function() {
-                    this.style.transform = 'scale(1) rotate(0deg)';
-                });
+                setTimeout(() => {
+                    isAnimating = false;
+                    element.style.willChange = 'auto';
+                }, 300);
             });
-        });
+        }
+
+        // Optimized event handlers
+        function initializeEventHandlers() {
+            // Optimized hover effects with debouncing
+            const debouncedHover = debounceAnimation((element, transform) => {
+                smoothTransform(element, transform);
+            });
+
+            // Anime illustration hover effects
+            document.querySelectorAll('.anime-illustration').forEach(element => {
+                element.addEventListener('mouseenter', () => {
+                    debouncedHover(element, 'scale(1.1) rotate(5deg)');
+                }, { passive: true });
+                
+                element.addEventListener('mouseleave', () => {
+                    debouncedHover(element, 'scale(1) rotate(0deg)');
+                }, { passive: true });
+            });
+        }
 
         // Support functions
         function retryPage() {
@@ -641,6 +680,36 @@
         function goHome() {
             window.location.href = '/';
         }
+
+        // Optimized initialization
+        function initialize() {
+            // Use requestIdleCallback for non-critical tasks
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(() => {
+                    createParticles();
+                    initializeEventHandlers();
+                });
+            } else {
+                // Fallback for browsers without requestIdleCallback
+                setTimeout(() => {
+                    createParticles();
+                    initializeEventHandlers();
+                }, 100);
+            }
+        }
+
+        // Enhanced loading with better performance
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initialize, { once: true });
+        } else {
+            initialize();
+        }
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', () => {
+            isAnimating = false;
+            particlesCreated = false;
+        }, { passive: true });
     </script>
 </head>
 <body>
@@ -658,7 +727,7 @@
             
             <div class="error-code">
                 <h4>Mã lỗi HTTP Server</h4>
-                <div class="code">5xx</div>
+                <div class="code">::CLOUDFLARE_ERROR_500S_BOX::</div>
             </div>
 
             <div class="error-section">
