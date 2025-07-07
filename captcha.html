@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xác Minh An Toàn - AnimeVietsub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#ff9a9e,#fecfef,#ff6b6b,#d63384);min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative}
+        .container{max-width:1200px;width:100%;margin:0 auto;padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;min-height:100vh}
+        .left-section{background:rgba(255,255,255,0.95);backdrop-filter:blur(25px);border-radius:25px;padding:40px;box-shadow:0 20px 40px rgba(220,38,38,0.15);border:2px solid rgba(255,182,193,0.3);position:relative}
+        .left-section::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#ff6b6b,#e91e63,#d63384);border-radius:25px 25px 0 0}
+        .right-section{background:rgba(255,255,255,0.15);backdrop-filter:blur(25px);border-radius:25px;padding:40px;border:2px solid rgba(255,255,255,0.3);display:flex;flex-direction:column;align-items:center;text-align:center;color:white;position:relative}
+        .logo{display:flex;align-items:center;gap:15px;margin-bottom:24px}
+        .logo i{font-size:36px;background:linear-gradient(45deg,#ff6b6b,#e91e63,#d63384);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .logo h1{font-size:24px;font-weight:700;background:linear-gradient(45deg,#2d3748,#4a5568);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:0}
+        .main-title{font-size:28px;font-weight:700;background:linear-gradient(45deg,#1e293b,#334155);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px;line-height:1.2}
+        .subtitle{font-size:16px;color:#64748b;margin-bottom:24px;line-height:1.6;font-weight:500}
+        .domain-info{background:linear-gradient(135deg,#ff6b6b,#e91e63,#d63384);color:white;padding:20px;border-radius:16px;margin-bottom:24px;font-weight:700;text-align:center;box-shadow:0 10px 25px rgba(255,107,107,0.4);border:1px solid rgba(255,255,255,0.2)}
+        .verification-section{background:linear-gradient(135deg,#fef2f2,#fdf2f8,#fff1f2);border-radius:20px;padding:32px;margin-bottom:28px;border:2px solid rgba(255,182,193,0.4);text-align:center;position:relative;box-shadow:0 8px 25px rgba(255,107,107,0.15)}
+        .verification-section h3{color:#dc2626;font-size:18px;font-weight:700;margin-bottom:16px}
+        .captcha-placeholder{background:linear-gradient(135deg,#ffffff,#fef7f7);border:2px solid #ffb6c1;border-radius:12px;padding:36px 20px;margin:12px 0;color:#dc2626;font-size:14px;position:relative;box-shadow:inset 0 2px 4px rgba(255,182,193,0.3)}
+        .instruction,.warning,.error{border-radius:15px;padding:20px;margin-bottom:20px;position:relative;border-left:4px solid}
+        .instruction{background:linear-gradient(135deg,#fef2f2,#fdf2f8);border-left-color:#ef4444}
+        .warning{background:linear-gradient(135deg,#fef3c7,#fde68a);border-left-color:#f59e0b}
+        .error{background:linear-gradient(135deg,#fee2e2,#fecaca);border-left-color:#dc2626}
+        .instruction h3,.warning h3,.error h3{font-size:16px;font-weight:700;margin-bottom:10px}
+        .instruction h3{color:#dc2626}
+        .warning h3{color:#92400e}
+        .error h3{color:#b91c1c}
+        .instruction p,.warning p,.error p{font-size:14px;line-height:1.6;margin:0;font-weight:500}
+        .instruction p{color:#991b1b}
+        .warning p{color:#78350f}
+        .error p{color:#991b1b}
+        .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 28px;border:none;border-radius:16px;font-weight:700;font-size:14px;cursor:pointer;transition:all 0.3s ease;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,0.15);position:relative;overflow:hidden}
+        .btn-primary{background:linear-gradient(135deg,#ff6b6b,#e91e63,#d63384);color:white;box-shadow:0 8px 25px rgba(255,107,107,0.4);border:2px solid rgba(255,255,255,0.2)}
+        .btn-primary:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 12px 35px rgba(255,107,107,0.6)}
+        .btn-secondary{background:linear-gradient(135deg,#ffffff,#fef7f7);color:#dc2626;border:2px solid #ff6b6b;box-shadow:0 6px 20px rgba(220,38,38,0.2)}
+        .btn-secondary:hover{background:linear-gradient(135deg,#ff6b6b,#e91e63);color:white;transform:translateY(-3px) scale(1.03);box-shadow:0 12px 35px rgba(220,38,38,0.4)}
+        .contact-link{display:inline-flex;align-items:center;gap:10px;color:#dc2626;text-decoration:none;font-weight:700;font-size:14px;transition:all 0.3s ease;padding:10px 16px;border-radius:12px;background:linear-gradient(135deg,rgba(255,107,107,0.1),rgba(233,30,99,0.1));border:2px solid rgba(220,38,38,0.2)}
+        .contact-link:hover{color:#b91c1c;transform:translateX(6px) scale(1.03);background:linear-gradient(135deg,rgba(255,107,107,0.2),rgba(233,30,99,0.2));border-color:rgba(220,38,38,0.4)}
+        .footer{margin-top:24px;padding-top:20px;border-top:2px solid rgba(255,182,193,0.3);font-size:11px;color:#64748b}
+        .footer ul{list-style:none;display:flex;flex-wrap:wrap;gap:16px}
+        .footer li{display:flex;align-items:center;gap:4px;font-weight:500}
+        .footer i{color:#ff6b6b}
+        .anime-illustration{width:200px;height:200px;margin-bottom:32px;background:linear-gradient(135deg,#ff6b6b,#e91e63,#d63384);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 20px 40px rgba(255,107,107,0.4);animation:float 4s ease-in-out infinite;border:3px solid rgba(255,255,255,0.3);padding:6px}
+        .anime-illustration img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+        @keyframes float{0%,100%{transform:translateY(0px)}50%{transform:translateY(-10px)}}
+        .right-section h3{font-size:22px;font-weight:700;margin-bottom:16px;text-shadow:2px 2px 4px rgba(0,0,0,0.3)}
+        .right-section p{font-size:14px;margin-bottom:24px;opacity:0.95;line-height:1.6;font-weight:500}
+        .feature-list{list-style:none;margin-bottom:24px}
+        .feature-list li{display:flex;align-items:center;gap:12px;margin-bottom:16px;color:rgba(255,255,255,0.95);font-weight:600;font-size:14px}
+        .feature-list i{color:#10b981;font-size:18px;background:rgba(16,185,129,0.2);padding:8px;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:2px solid rgba(16,185,129,0.3)}
+        @media (max-width:768px){.container{grid-template-columns:1fr;gap:16px;padding:12px}.left-section,.right-section{padding:24px 20px}.main-title{font-size:22px}.anime-illustration{width:140px;height:140px}.right-section{order:-1}.right-section h3{font-size:18px}}
+        @media (prefers-color-scheme:dark){.left-section{background:rgba(30,41,59,0.95);color:white;border-color:rgba(255,107,107,0.3)}.logo h1,.main-title{background:linear-gradient(45deg,#ffffff,#f1f5f9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}.subtitle{color:#cbd5e1}.verification-section{background:linear-gradient(135deg,rgba(51,65,85,0.8),rgba(30,41,59,0.8));border-color:rgba(255,107,107,0.4)}.captcha-placeholder{background:linear-gradient(135deg,rgba(239,68,68,0.2),rgba(220,38,38,0.2));border-color:#ff6b6b;color:#fca5a5}.footer{border-color:rgba(255,107,107,0.3);color:#cbd5e1}.instruction,.warning,.error{background:linear-gradient(135deg,rgba(51,65,85,0.6),rgba(30,41,59,0.6))}}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-section">
+            <div class="logo">
+                <i class="fas fa-torii-gate"></i>
+                <h1>AnimeVietsub</h1>
+            </div>
+            <h2 class="main-title">Xác Minh Bảo Mật ✨</h2>
+            <p class="subtitle">Chúng tôi cần xác minh rằng bạn là người thật để bảo vệ trang web khỏi các cuộc tấn công tự động. Cảm ơn bạn đã kiên nhẫn! 🌸</p>
+            <div class="domain-info">
+                <i class="fas fa-globe"></i>
+                Đang truy cập: <span id="domainName"></span>
+            </div>
+            <div class="instruction">
+                <h3><i class="fas fa-magic"></i> Hướng dẫn xác minh</h3>
+                <p>Vui lòng đợi một chút để hệ thống tải ô xác minh bên dưới, sau đó click vào ô đó để hoàn tất quá trình xác minh. ✨</p>
+            </div>
+            <div class="verification-section">
+                <h3>🛡️ Khu vực xác minh</h3>
+                <div class="captcha-placeholder">
+                    <i class="fas fa-heart" style="font-size: 24px; color: #ff6b6b; margin-bottom: 12px;"></i>
+                    <br>
+                    <strong>::CAPTCHA_BOX::</strong>
+                    <br>
+                    <small>Ô xác minh sẽ xuất hiện tại đây như phép thuật! ✨</small>
+                </div>
+            </div>
+            <div class="warning">
+                <h3><i class="fas fa-star"></i> Lưu ý quan trọng</h3>
+                <p>Nếu không thấy ô xác minh, vui lòng thử với trình duyệt khác hoặc tắt trình chặn quảng cáo. Đôi khi phép thuật cần thời gian! 🎭</p>
+            </div>
+            <div class="error">
+                <h3><i class="fas fa-redo-alt"></i> Gặp vấn đề?</h3>
+                <p>Nếu xác minh bị lỗi lặp lại, hãy thử tải lại trang hoặc sử dụng trình duyệt khác. Mọi thứ sẽ ổn thôi! 💪</p>
+            </div>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <button id="unregisterButton" class="btn btn-primary">
+                    <i class="fas fa-sparkles"></i>
+                    Tải Lại Trang
+                </button>
+            </div>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <a href="https://www.facebook.com/animevietsub.info" class="contact-link">
+                    <i class="fab fa-facebook"></i>
+                    Liên hệ Admin để được hỗ trợ
+                </a>
+            </div>
+            <div class="footer">
+                <ul>
+                    <li><i class="fas fa-fingerprint"></i> Cloudflare ID: ::RAY_ID::</li>
+                    <li><i class="fas fa-map-marker-alt"></i> IP: ::CLIENT_IP::</li>
+                    <li><i class="fas fa-shield-alt"></i> Bảo mật bởi Cloudflare</li>
+                </ul>
+            </div>
+        </div>
+        <div class="right-section">
+            <div class="anime-illustration">
+                <img src="3883bc0d71ed10c82fc01ef0565dd740.jpg" alt="Anime Character" />
+            </div>
+            <h3>Trải nghiệm anime tuyệt vời 🌸</h3>
+            <p>Hàng nghìn bộ anime chất lượng cao đang chờ bạn khám phá! Hãy cùng nhau tạo nên những kỷ niệm đẹp! ✨</p>
+            <ul class="feature-list">
+                <li><i class="fas fa-gem"></i><span>Chất lượng HD/Full HD cực nét</span></li>
+                <li><i class="fas fa-language"></i><span>Phụ đề tiếng Việt chất lượng</span></li>
+                <li><i class="fas fa-rocket"></i><span>Cập nhật nhanh như chớp</span></li>
+                <li><i class="fas fa-gift"></i><span>Hoàn toàn miễn phí</span></li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        window.onload = function() {
+            document.getElementById("domainName").innerHTML = window.location.hostname;
+        };
+        function unregisterSW() {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistrations().then(registrations => {
+                    if (registrations.length === 0) {
+                        alert('Không thể xóa service worker! Hãy thử trình duyệt khác. 🌸');
+                        location.reload();
+                        return;
+                    }
+                    Promise.all(registrations.map(registration => registration.unregister()))
+                        .then(() => {
+                            alert('Đã xóa cache thành công và tải lại trang! ✨');
+                            location.reload();
+                        })
+                        .catch(error => {
+                            console.error('Lỗi khi tải lại trang:', error);
+                            alert('Có lỗi xảy ra, vui lòng thử lại! 💪');
+                        });
+                });
+            } else {
+                alert('Trình duyệt không hỗ trợ Service Worker. Hãy sử dụng Chrome, Edge, hoặc Firefox. 🌟');
+            }
+        }
+        document.getElementById('unregisterButton').addEventListener('click', unregisterSW);
+    </script>
+</body>
+</html>

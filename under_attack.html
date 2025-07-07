@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xác Minh An Toàn - AnimeVietsub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#ff9a9e,#fecfef,#ff6b6b,#d63384);min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative}
+        .container{max-width:1200px;width:100%;margin:0 auto;padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;min-height:100vh}
+        .left-section{background:rgba(255,255,255,0.95);backdrop-filter:blur(25px);border-radius:25px;padding:40px;box-shadow:0 20px 40px rgba(220,38,38,0.15);border:2px solid rgba(255,182,193,0.3);position:relative}
+        .left-section::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#ff6b6b,#e91e63,#d63384);border-radius:25px 25px 0 0}
+        .right-section{background:rgba(255,255,255,0.15);backdrop-filter:blur(25px);border-radius:25px;padding:40px;border:2px solid rgba(255,255,255,0.3);display:flex;flex-direction:column;align-items:center;text-align:center;color:white;position:relative}
+        .logo{display:flex;align-items:center;gap:15px;margin-bottom:24px}
+        .logo i{font-size:36px;background:linear-gradient(45deg,#ff6b6b,#e91e63,#d63384);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .logo h1{font-size:24px;font-weight:700;background:linear-gradient(45deg,#2d3748,#4a5568);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:0}
+        .main-title{font-size:28px;font-weight:700;background:linear-gradient(45deg,#1e293b,#334155);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px;line-height:1.2}
+        .subtitle{font-size:16px;color:#64748b;margin-bottom:24px;line-height:1.6;font-weight:500}
+        .alert-section{background:linear-gradient(135deg,#fef2f2,#fee2e2);border-radius:20px;padding:32px;margin-bottom:24px;border:2px solid rgba(239,68,68,0.3);text-align:center;position:relative;box-shadow:0 8px 25px rgba(239,68,68,0.15)}
+        .alert-section h3{color:#dc2626;font-size:18px;font-weight:700;margin-bottom:16px}
+        .attack-indicator{background:linear-gradient(135deg,#dc2626,#b91c1c);color:white;border-radius:12px;padding:20px;margin:12px 0;position:relative;box-shadow:0 8px 20px rgba(220,38,38,0.3);animation:pulse 2s ease-in-out infinite}
+        @keyframes pulse{0%,100%{transform:scale(1);box-shadow:0 8px 20px rgba(220,38,38,0.3)}50%{transform:scale(1.02);box-shadow:0 12px 30px rgba(220,38,38,0.5)}}
+        .status-section{background:linear-gradient(135deg,#fffbeb,#fef3c7);border-radius:18px;padding:20px;margin-bottom:20px;border-left:4px solid #f59e0b}
+        .status-section h3{color:#92400e;font-size:16px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+        .status-section p{color:#78350f;line-height:1.6;font-weight:500}
+        .info-section{background:linear-gradient(135deg,#f0f9ff,#e0f2fe);border-radius:18px;padding:20px;margin-bottom:20px;border-left:4px solid #0ea5e9}
+        .info-section h3{color:#0369a1;font-size:16px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+        .info-section p{color:#0c4a6e;line-height:1.6;font-weight:500}
+        .countdown{font-size:36px;font-weight:700;color:#dc2626;margin:16px 0;font-family:monospace;text-shadow:2px 2px 4px rgba(220,38,38,0.3)}
+        .footer{margin-top:24px;padding-top:20px;border-top:2px solid rgba(255,182,193,0.3);font-size:11px;color:#64748b}
+        .footer ul{list-style:none;display:flex;flex-wrap:wrap;gap:16px}
+        .footer li{display:flex;align-items:center;gap:4px;font-weight:500}
+        .footer i{color:#ff6b6b}
+        .anime-illustration{width:200px;height:200px;margin-bottom:32px;background:linear-gradient(135deg,#ff6b6b,#e91e63,#d63384);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 20px 40px rgba(255,107,107,0.4);animation:float 4s ease-in-out infinite;border:3px solid rgba(255,255,255,0.3);padding:6px}
+        .anime-illustration img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+        @keyframes float{0%,100%{transform:translateY(0px)}50%{transform:translateY(-10px)}}
+        .right-section h3{font-size:22px;font-weight:700;margin-bottom:16px;text-shadow:2px 2px 4px rgba(0,0,0,0.3)}
+        .right-section p{font-size:14px;margin-bottom:24px;opacity:0.95;line-height:1.6;font-weight:500}
+        .feature-list{list-style:none;margin-bottom:24px}
+        .feature-list li{display:flex;align-items:center;gap:12px;margin-bottom:16px;color:rgba(255,255,255,0.95);font-weight:600;font-size:14px}
+        .feature-list i{color:#10b981;font-size:18px;background:rgba(16,185,129,0.2);padding:8px;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:2px solid rgba(16,185,129,0.3)}
+        .shield-animation{display:inline-block;animation:shield-spin 3s linear infinite}
+        @keyframes shield-spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+        @media (max-width:768px){.container{grid-template-columns:1fr;gap:16px;padding:12px}.left-section,.right-section{padding:24px 20px}.main-title{font-size:22px}.anime-illustration{width:140px;height:140px}.right-section{order:-1}.right-section h3{font-size:18px}.countdown{font-size:28px}}
+        @media (prefers-color-scheme:dark){.left-section{background:rgba(30,41,59,0.95);color:white;border-color:rgba(255,107,107,0.3)}.logo h1,.main-title{background:linear-gradient(45deg,#ffffff,#f1f5f9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}.subtitle{color:#cbd5e1}.footer{border-color:rgba(255,107,107,0.3);color:#cbd5e1}}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-section">
+            <div class="logo">
+                <i class="fas fa-torii-gate"></i>
+                <h1>AnimeVietsub</h1>
+            </div>
+            <h2 class="main-title">Chế Độ Bảo Vệ! 🛡️</h2>
+            <p class="subtitle">Trang web đang chịu tấn công và kích hoạt chế độ bảo vệ tự động 🌸</p>
+            <div class="alert-section">
+                <h3><i class="fas fa-exclamation-triangle"></i> Cảnh báo tấn công</h3>
+                <div class="attack-indicator">
+                    <i class="shield-animation fas fa-shield-alt" style="font-size: 24px; margin-bottom: 8px;"></i><br>
+                    <strong>ĐANG CHỐNG TẤN CÔNG DDoS</strong>
+                </div>
+                <div class="countdown" id="countdown">15</div>
+                <small>Tự động chuyển hướng sau khi kiểm tra hoàn tất ✨</small>
+            </div>
+            <div class="status-section">
+                <h3><i class="fas fa-chart-line"></i> Trạng thái hệ thống</h3>
+                <p>• Phát hiện lưu lượng bất thường<br>• Kích hoạt bộ lọc DDoS<br>• Xác minh người dùng thật<br>• Bảo vệ tài nguyên server 🎭</p>
+            </div>
+            <div class="info-section">
+                <h3><i class="fas fa-info-circle"></i> Thông tin quan trọng</h3>
+                <p>Chế độ này sẽ tự động tắt khi mối đe dọa kết thúc. Bạn không cần làm gì cả, chỉ cần đợi một chút! 💪</p>
+            </div>
+            <div class="footer">
+                <ul>
+                    <li><i class="fas fa-fingerprint"></i> Ray ID: ::RAY_ID::</li>
+                    <li><i class="fas fa-map-marker-alt"></i> IP: ::CLIENT_IP::</li>
+                    <li><i class="fas fa-shield-alt"></i> Bảo mật bởi Cloudflare</li>
+                </ul>
+            </div>
+        </div>
+        <div class="right-section">
+            <div class="anime-illustration">
+                <img src="3883bc0d71ed10c82fc01ef0565dd740.jpg" alt="Anime Character" />
+            </div>
+            <h3>Hệ thống phòng thủ tự động 🚀</h3>
+            <p>Công nghệ AI tiên tiến giúp chúng tôi phát hiện và chống lại các cuộc tấn công trong thời gian thực! ✨</p>
+            <ul class="feature-list">
+                <li><i class="fas fa-shield-virus"></i><span>Chống DDoS thông minh</span></li>
+                <li><i class="fas fa-brain"></i><span>AI phân tích mối đe dọa</span></li>
+                <li><i class="fas fa-bolt"></i><span>Phản ứng tức thì</span></li>
+                <li><i class="fas fa-globe"></i><span>Mạng lưới toàn cầu</span></li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        let countdown = 15;
+        const countdownElement = document.getElementById('countdown');
+        
+        const timer = setInterval(function() {
+            countdown--;
+            countdownElement.textContent = countdown;
+            
+            if (countdown <= 0) {
+                clearInterval(timer);
+                countdownElement.textContent = '0';
+                document.querySelector('.attack-indicator').innerHTML = 
+                    '<i class="fas fa-check-circle" style="font-size: 24px; color: #10b981; margin-bottom: 8px;"></i><br>' +
+                    '<strong style="color: #10b981;">BẢO VỆ HOÀN TẤT</strong>';
+                setTimeout(function() {
+                    window.location.href = '::REDIRECT_URL::';
+                }, 2000);
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bị Chặn Bởi WAF - AnimeVietsub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#ff9a9e,#fecfef,#ff6b6b,#d63384);min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative}
+        .container{max-width:1200px;width:100%;margin:0 auto;padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;min-height:100vh}
+        .left-section{background:rgba(255,255,255,0.95);backdrop-filter:blur(25px);border-radius:25px;padding:40px;box-shadow:0 20px 40px rgba(220,38,38,0.15);border:2px solid rgba(255,182,193,0.3);position:relative}
+        .left-section::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#ff6b6b,#e91e63,#d63384);border-radius:25px 25px 0 0}
+        .right-section{background:rgba(255,255,255,0.15);backdrop-filter:blur(25px);border-radius:25px;padding:40px;border:2px solid rgba(255,255,255,0.3);display:flex;flex-direction:column;align-items:center;text-align:center;color:white;position:relative}
+        .logo{display:flex;align-items:center;gap:15px;margin-bottom:24px}
+        .logo i{font-size:36px;background:linear-gradient(45deg,#ff6b6b,#e91e63,#d63384);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .logo h1{font-size:24px;font-weight:700;background:linear-gradient(45deg,#2d3748,#4a5568);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:0}
+        .main-title{font-size:28px;font-weight:700;background:linear-gradient(45deg,#1e293b,#334155);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px;line-height:1.2}
+        .subtitle{font-size:16px;color:#64748b;margin-bottom:24px;line-height:1.6;font-weight:500}
+        .waf-alert{background:linear-gradient(135deg,#dc2626,#b91c1c);color:white;padding:20px;border-radius:16px;margin-bottom:24px;font-weight:700;text-align:center;box-shadow:0 10px 25px rgba(220,38,38,0.4);border:1px solid rgba(255,255,255,0.2)}
+        .block-section{background:linear-gradient(135deg,#fef2f2,#fee2e2);border-radius:20px;padding:24px;margin-bottom:20px;border:2px solid rgba(239,68,68,0.3);box-shadow:0 8px 20px rgba(239,68,68,0.15)}
+        .block-section h3{color:#dc2626;font-size:18px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+        .block-section p{color:#7f1d1d;line-height:1.6;font-weight:500}
+        .reason-section{background:linear-gradient(135deg,#fefce8,#fef3c7);border-radius:18px;padding:20px;margin-bottom:20px;border-left:4px solid #f59e0b}
+        .reason-section h3{color:#92400e;font-size:16px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+        .reason-section p{color:#78350f;line-height:1.6;font-weight:500}
+        .solution-section{background:linear-gradient(135deg,#f0f9ff,#e0f2fe);border-radius:18px;padding:20px;margin-bottom:20px;border-left:4px solid #0ea5e9}
+        .solution-section h3{color:#0369a1;font-size:16px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+        .solution-section p{color:#0c4a6e;line-height:1.6;font-weight:500}
+        .contact-section{background:linear-gradient(135deg,#ecfdf5,#d1fae5);border-radius:18px;padding:20px;margin-bottom:20px;border-left:4px solid #10b981;text-align:center}
+        .contact-section h3{color:#047857;font-size:16px;font-weight:700;margin-bottom:12px}
+        .contact-button{background:linear-gradient(135deg,#ff6b6b,#ff8e53);color:white;border:none;padding:12px 24px;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.3s ease;box-shadow:0 6px 20px rgba(255,107,107,0.3);display:inline-flex;align-items:center;gap:8px;text-decoration:none;margin:4px}
+        .contact-button:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(255,107,107,0.4)}
+        .footer{margin-top:24px;padding-top:20px;border-top:2px solid rgba(255,182,193,0.3);font-size:11px;color:#64748b}
+        .footer ul{list-style:none;display:flex;flex-wrap:wrap;gap:16px}
+        .footer li{display:flex;align-items:center;gap:4px;font-weight:500}
+        .footer i{color:#ff6b6b}
+        .anime-illustration{width:200px;height:200px;margin-bottom:32px;background:linear-gradient(135deg,#ff6b6b,#e91e63,#d63384);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 20px 40px rgba(255,107,107,0.4);animation:float 4s ease-in-out infinite;border:3px solid rgba(255,255,255,0.3);padding:6px}
+        .anime-illustration img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+        @keyframes float{0%,100%{transform:translateY(0px)}50%{transform:translateY(-10px)}}
+        .right-section h3{font-size:22px;font-weight:700;margin-bottom:16px;text-shadow:2px 2px 4px rgba(0,0,0,0.3)}
+        .right-section p{font-size:14px;margin-bottom:24px;opacity:0.95;line-height:1.6;font-weight:500}
+        .feature-list{list-style:none;margin-bottom:24px}
+        .feature-list li{display:flex;align-items:center;gap:12px;margin-bottom:16px;color:rgba(255,255,255,0.95);font-weight:600;font-size:14px}
+        .feature-list i{color:#10b981;font-size:18px;background:rgba(16,185,129,0.2);padding:8px;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:2px solid rgba(16,185,129,0.3)}
+        @media (max-width:768px){.container{grid-template-columns:1fr;gap:16px;padding:12px}.left-section,.right-section{padding:24px 20px}.main-title{font-size:22px}.anime-illustration{width:140px;height:140px}.right-section{order:-1}.right-section h3{font-size:18px}.contact-button{margin:4px 0;display:block;width:100%;justify-content:center}}
+        @media (prefers-color-scheme:dark){.left-section{background:rgba(30,41,59,0.95);color:white;border-color:rgba(255,107,107,0.3)}.logo h1,.main-title{background:linear-gradient(45deg,#ffffff,#f1f5f9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}.subtitle{color:#cbd5e1}.footer{border-color:rgba(255,107,107,0.3);color:#cbd5e1}}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-section">
+            <div class="logo">
+                <i class="fas fa-torii-gate"></i>
+                <h1>AnimeVietsub</h1>
+            </div>
+            <h2 class="main-title">Bị Chặn Bởi WAF! 🛡️</h2>
+            <p class="subtitle">Yêu cầu của bạn đã bị Web Application Firewall chặn lại 🌸</p>
+            <div class="waf-alert">
+                <i class="fas fa-ban"></i>
+                Phát hiện hoạt động đáng ngờ - Request ID: ::REQUEST_ID::
+            </div>
+            <div class="block-section">
+                <h3><i class="fas fa-shield-alt"></i> Lý do bị chặn</h3>
+                <p>WAF (Web Application Firewall) đã phát hiện yêu cầu của bạn chứa pattern có thể gây hại đến hệ thống. Đây là biện pháp bảo vệ tự động. ✨</p>
+            </div>
+            <div class="reason-section">
+                <h3><i class="fas fa-exclamation-triangle"></i> Nguyên nhân có thể</h3>
+                <p>• SQL Injection pattern trong URL/form<br>• Cross-site scripting (XSS) attempt<br>• File inclusion attack<br>• Command injection pattern<br>• Malicious request headers 🎭</p>
+            </div>
+            <div class="solution-section">
+                <h3><i class="fas fa-lightbulb"></i> Cách khắc phục</h3>
+                <p>• Kiểm tra lại URL hoặc form data<br>• Loại bỏ ký tự đặc biệt không cần thiết<br>• Sử dụng trình duyệt khác<br>• Thử lại sau vài phút<br>• Liên hệ admin nếu cần 💪</p>
+            </div>
+            <div class="contact-section">
+                <h3>🆘 Cần hỗ trợ?</h3>
+                <p>Nếu bạn tin rằng đây là nhầm lẫn, hãy liên hệ với chúng tôi!</p>
+                <a href="https://www.facebook.com/animevietsub.info" class="contact-button">
+                    <i class="fab fa-facebook"></i> Liên hệ Admin
+                </a>
+                <a href="mailto:support@animevietsub.info" class="contact-button">
+                    <i class="fas fa-envelope"></i> Email hỗ trợ
+                </a>
+            </div>
+            <div class="footer">
+                <ul>
+                    <li><i class="fas fa-fingerprint"></i> Ray ID: ::RAY_ID::</li>
+                    <li><i class="fas fa-map-marker-alt"></i> IP: ::CLIENT_IP::</li>
+                    <li><i class="fas fa-shield-alt"></i> Bảo mật bởi Cloudflare</li>
+                </ul>
+            </div>
+        </div>
+        <div class="right-section">
+            <div class="anime-illustration">
+                <img src="3883bc0d71ed10c82fc01ef0565dd740.jpg" alt="Anime Character" />
+            </div>
+            <h3>Web Application Firewall 🔥</h3>
+            <p>Công nghệ WAF tiên tiến giúp chúng tôi bảo vệ ứng dụng khỏi các cuộc tấn công phức tạp! ✨</p>
+            <ul class="feature-list">
+                <li><i class="fas fa-bug"></i><span>Chặn SQL Injection</span></li>
+                <li><i class="fas fa-code"></i><span>Ngăn chặn XSS</span></li>
+                <li><i class="fas fa-file-shield"></i><span>Bảo vệ file upload</span></li>
+                <li><i class="fas fa-brain"></i><span>Machine Learning detection</span></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

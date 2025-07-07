@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đang Kiểm Tra - AnimeVietsub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, 
+                #ff9a9e 0%, 
+                #fecfef 15%, 
+                #ffecd2 30%, 
+                #fcb69f 45%, 
+                #ff6b6b 60%, 
+                #ee5a52 75%, 
+                #d63384 90%, 
+                #b91c1c 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Watercolor background effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 182, 193, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 80% 30%, rgba(255, 105, 97, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 70%, rgba(255, 192, 203, 0.5) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(220, 20, 60, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 10% 60%, rgba(255, 20, 147, 0.4) 0%, transparent 50%);
+            filter: blur(40px);
+            animation: watercolor 20s ease-in-out infinite alternate;
+            z-index: -2;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><filter id="roughpaper" x="0%" y="0%" width="100%" height="100%"><feTurbulence result="noise" baseFrequency="0.04" numOctaves="5" seed="1"/><feDiffuseLighting in="noise" lighting-color="white" surfaceScale="1"><feDistantLight azimuth="45" elevation="60"/></feDiffuseLighting></filter></defs><rect width="100%" height="100%" filter="url(%23roughpaper)" opacity="0.03"/></svg>') repeat;
+            z-index: -1;
+        }
+
+        @keyframes watercolor {
+            0% { 
+                filter: blur(40px) hue-rotate(0deg);
+                transform: scale(1); 
+            }
+            50% { 
+                filter: blur(50px) hue-rotate(10deg);
+                transform: scale(1.05); 
+            }
+            100% { 
+                filter: blur(35px) hue-rotate(-10deg);
+                transform: scale(1.02); 
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .left-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(25px);
+            border-radius: 35px;
+            padding: 52px;
+            box-shadow: 
+                0 30px 60px rgba(220, 38, 38, 0.15), 
+                0 8px 25px rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            border: 2px solid rgba(255, 182, 193, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .left-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, 
+                #ff6b6b 0%, 
+                #ff8a80 25%, 
+                #ff5722 50%, 
+                #e91e63 75%, 
+                #d63384 100%);
+            border-radius: 35px 35px 0 0;
+        }
+
+        .left-section::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(255, 182, 193, 0.08), transparent);
+            animation: rotate 25s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .right-section {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(25px);
+            border-radius: 35px;
+            padding: 52px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .right-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shine 6s ease-in-out infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 32px;
+        }
+
+        .logo i {
+            font-size: 42px;
+            background: linear-gradient(45deg, #ff6b6b, #ff8a80, #e91e63, #d63384);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 3px 6px rgba(220, 38, 38, 0.4));
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 3px 6px rgba(220, 38, 38, 0.4)); }
+            50% { transform: scale(1.1); filter: drop-shadow(0 5px 15px rgba(220, 38, 38, 0.6)); }
+        }
+
+        .logo h1 {
+            font-size: 28px;
+            font-weight: 800;
+            font-family: 'Fredoka', 'Segoe UI', sans-serif;
+            background: linear-gradient(45deg, #2d3748, #4a5568, #1a202c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .main-title {
+            font-size: 36px;
+            font-weight: 800;
+            font-family: 'Fredoka', 'Segoe UI', sans-serif;
+            background: linear-gradient(45deg, #1e293b, #334155, #0f172a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #64748b;
+            margin-bottom: 32px;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .verification-status {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-radius: 25px;
+            padding: 30px;
+            margin-bottom: 24px;
+            border: 3px solid rgba(56, 189, 248, 0.3);
+            position: relative;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
+        }
+
+        .verification-status h3 {
+            color: #0369a1;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-family: 'Quicksand', 'Segoe UI', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .verification-status p {
+            color: #0c4a6e;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .warning-section {
+            background: linear-gradient(135deg, #fefce8 0%, #fef3c7 100%);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 24px;
+            border-left: 6px solid #f59e0b;
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.15);
+        }
+
+        .warning-section h3 {
+            color: #92400e;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            font-family: 'Quicksand', 'Segoe UI', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .warning-section p {
+            color: #78350f;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .reload-section {
+            background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 24px;
+            border: 2px solid rgba(251, 146, 60, 0.2);
+            text-align: center;
+        }
+
+        .reload-section h3 {
+            color: #c2410c;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-family: 'Quicksand', 'Segoe UI', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .reload-section p {
+            color: #c2410c;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .reload-button {
+            background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+            font-family: 'Poppins', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .reload-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(255, 107, 107, 0.4);
+        }
+
+        .contact-link {
+            color: #0369a1;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: #0284c7;
+        }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            color: #dc2626;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 12px 20px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(233, 30, 99, 0.1) 100%);
+            border: 2px solid rgba(220, 38, 38, 0.2);
+            font-family: 'Quicksand', 'Segoe UI', sans-serif;
+        }
+
+        .contact-link:hover {
+            color: #b91c1c;
+            transform: translateX(8px) scale(1.05);
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.2) 0%, rgba(233, 30, 99, 0.2) 100%);
+            border-color: rgba(220, 38, 38, 0.4);
+        }
+
+        .footer {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 2px solid rgba(255, 182, 193, 0.3);
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .footer ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer li {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+        }
+
+        .footer i {
+            color: #ff6b6b;
+        }
+
+        .anime-illustration {
+            width: 280px;
+            height: 280px;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8a80 25%, #e91e63 50%, #d63384 75%, #b91c1c 100%);
+            border-radius: 50%;
+            display: flex;
+                    align-items: center;
+                    justify-content: center;
+            box-shadow: 
+                0 30px 60px rgba(255, 107, 107, 0.4),
+                0 10px 30px rgba(233, 30, 99, 0.3),
+                inset 0 5px 0 rgba(255, 255, 255, 0.2);
+            animation: anime-float 4s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            padding: 8px;
+        }
+
+        .anime-illustration img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            filter: brightness(1.1) saturate(1.2);
+        }
+
+        @keyframes anime-float {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg); 
+                box-shadow: 
+                    0 30px 60px rgba(255, 107, 107, 0.4),
+                    0 10px 30px rgba(233, 30, 99, 0.3),
+                    inset 0 5px 0 rgba(255, 255, 255, 0.2);
+            }
+            50% { 
+                transform: translateY(-15px) rotate(5deg); 
+                box-shadow: 
+                    0 35px 70px rgba(255, 107, 107, 0.5),
+                    0 15px 35px rgba(233, 30, 99, 0.4),
+                    inset 0 5px 0 rgba(255, 255, 255, 0.3);
+            }
+        }
+
+        .right-section h3 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            font-family: 'Fredoka', 'Segoe UI', sans-serif;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .right-section p {
+            font-size: 16px;
+            margin-bottom: 36px;
+            opacity: 0.95;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .feature-list i {
+            color: #10b981;
+            font-size: 22px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.2));
+            padding: 10px;
+            border-radius: 50%;
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+        }
+
+        /* Floating particles effect */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 107, 107, 0.6);
+            border-radius: 50%;
+            animation: float-particle 15s linear infinite;
+        }
+
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 16px;
+            }
+
+            .left-section,
+            .right-section {
+                padding: 32px 24px;
+            }
+
+            .main-title {
+                font-size: 28px;
+            }
+
+            .anime-illustration {
+                width: 180px;
+                height: 180px;
+            }
+
+            .right-section {
+                order: -1;
+            }
+
+            .right-section h3 {
+                font-size: 24px;
+            }
+        }
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            .left-section {
+                background: rgba(30, 41, 59, 0.95);
+                color: white;
+                border-color: rgba(255, 107, 107, 0.3);
+            }
+
+            .logo h1,
+            .main-title {
+                background: linear-gradient(45deg, #ffffff, #f1f5f9, #e2e8f0);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            .subtitle {
+                color: #cbd5e1;
+            }
+
+            .footer {
+                border-color: rgba(255, 107, 107, 0.3);
+                color: #cbd5e1;
+            }
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function runScript(){
+            document.getElementById("domainName").innerHTML = window.location.hostname;
+            createParticles();
+        };
+
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.querySelector('.particles');
+            const colors = ['#ff6b6b', '#ff8a80', '#e91e63', '#d63384', '#ffb6c1'];
+            
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Add interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add sparkle effect on hover
+            document.querySelectorAll('.anime-illustration').forEach(element => {
+                element.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.1) rotate(5deg)';
+                });
+                
+                element.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1) rotate(0deg)';
+                });
+            });
+        });
+</script>
+</head>
+<body>
+    <div class="particles"></div>
+    
+    <div class="container">
+        <div class="left-section">
+            <div class="logo">
+                <i class="fas fa-torii-gate"></i>
+                <h1>AnimeVietsub</h1>
+            </div>
+
+            <h2 class="main-title">Đang Kiểm Tra Bảo Mật! 🛡️</h2>
+            <p class="subtitle">Đây không phải là lỗi, đây là tính năng bảo mật để bảo vệ website 🌸</p>
+            
+            <div class="verification-status">
+                <h3><i class="fas fa-cog fa-spin"></i> Đang Xác Minh Trình Duyệt</h3>
+                <p>Đang tiến hành kiểm tra trình duyệt của bạn, sẽ chuyển hướng đến trang web 
+                <strong><span id="domainName"></span></strong> sau 5 giây hoặc có thể lâu hơn chút. ✨</p>
+            </div>
+
+            <div class="warning-section">
+                <h3><i class="fas fa-exclamation-triangle"></i> Lưu ý quan trọng</h3>
+                <p><strong>Lưu ý:</strong> Không nên sử dụng các App không chính thống của <strong>AnimeVietsub</strong> 
+                có thể bị mất dữ liệu và dính virus! 🎭</p>
+            </div>
+
+            <div class="verification-status">
+                 ::IM_UNDER_ATTACK_BOX::
+            </div>
+
+            <div class="reload-section">
+                <h3><i class="fas fa-sync-alt"></i> Gặp Vấn Đề Xác Minh?</h3>
+                <p>Nếu bạn bị lỗi xác minh lặp lại hãy ấn "Tải Lại Trang" hoặc dùng trình duyệt khác!</p>
+                <button id="unregisterButton" class="reload-button">
+                    <i class="fas fa-redo"></i> Tải Lại Trang
+                </button>
+            </div>
+
+            <div style="text-align: center; margin-bottom: 24px;">
+                <a href="https://www.facebook.com/animevietsub.info" class="contact-link">
+                    <i class="fab fa-facebook"></i>
+                    Liên hệ Admin để được hỗ trợ
+                </a>
+            </div>
+
+            <div class="footer">
+                <ul>
+                    <li><i class="fas fa-fingerprint"></i> Ray ID: ::RAY_ID::</li>
+                    <li><i class="fas fa-map-marker-alt"></i> IP: ::CLIENT_IP::</li>
+                    <li><i class="fas fa-shield-alt"></i> Bảo mật bởi Cloudflare</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="right-section">
+            <div class="anime-illustration">
+                <img src="3883bc0d71ed10c82fc01ef0565dd740.jpg" alt="Anime Character" />
+            </div>
+            
+            <h3>Hệ thống xác minh thông minh 🔍</h3>
+            <p>Chúng tôi sử dụng công nghệ JavaScript tiên tiến để phân biệt người thật và bot một cách chính xác! ✨</p>
+            
+            <ul class="feature-list">
+                <li>
+                    <i class="fas fa-brain"></i>
+                    <span>Phân tích hành vi người dùng</span>
+                </li>
+                <li>
+                    <i class="fas fa-code"></i>
+                    <span>Kiểm tra JavaScript Engine</span>
+                </li>
+                <li>
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Xác minh tự động thông minh</span>
+                </li>
+                <li>
+                    <i class="fas fa-heart"></i>
+                    <span>Bảo vệ trải nghiệm người dùng</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+<script>
+    // Function to unregister SW
+    function unregisterSW() {
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(registrations => {
+          if (registrations.length === 0) {
+            alert('Không thể xoá sw! Hãy đổi trình duyệt khác');
+            location.reload();
+            return;
+          }
+          Promise.all(registrations.map(registration => registration.unregister()))
+            .then(() => {
+              alert('Xoá lịch sử thành công và tải lại trang');
+              // Reload the page after unregistering SW
+              location.reload();
+            })
+            .catch(error => {
+              alert('Lỗi tải lại trang:', error);
+            });
+        });
+      } else {
+        alert('Trình duyệt của bạn có thể không hỗ trợ, hãy dùng trình duyệt Chrome, Edge, Firefox');
+      }
+    }
+
+    // Event listener for the button click
+    document.getElementById('unregisterButton').addEventListener('click', unregisterSW);
+</script>
+</body>
+</html>
